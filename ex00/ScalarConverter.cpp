@@ -136,25 +136,6 @@ bool	ScalarConverter::isDouble(std::string str)
 	return false;
 }
 
-// std::string ScalarConverter::toChar(std::string str)
-// {
-// 	char chr;
-
-// 	try
-// 	{
-// 		chr = static_cast<char>(std::stoi(str));
-// 		value = "'" + std::string(1, chr) + "'";
-// 	}
-// 	catch (std::exception &e)
-// 	{
-// 		value = "impossible";
-// 		return value;
-// 	}
-// 	if (chr < 32 || chr > 126)
-// 		value = "Non displayable";
-// 	return value;
-// }
-
 void	ScalarConverter::toChar(std::string str)
 {
 	char c;
@@ -249,10 +230,7 @@ void	ScalarConverter::toDouble(std::string str)
 	// Float
 	float f = static_cast<float>(d);
 	std::string str_f;
-	if (d > FLT_MAX || d < FLT_MIN)
-		str_f = "impossible";
-	else
-		str_f = ScalarConverter::floatFormat(f);
+	str_f = ScalarConverter::floatFormat(f);
 
 	ScalarConverter::printFormat(str_c, str_i, str_f, str_d);
 }
