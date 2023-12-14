@@ -33,14 +33,36 @@ void	identify_from_pointer(Base *p)
 
 void	identify_from_reference(Base &p)
 {
-	if (dynamic_cast<A*>(&p))
+	try
+	{
+		A& a = dynamic_cast<A&>(p);
 		std::cout << "The type is: A" << std::endl;
-	else if (dynamic_cast<B*>(&p))
-		std::cout << "The type is: B" << std::endl;
-	else if (dynamic_cast<C*>(&p))
-		std::cout << "The type is: C" << std::endl;
-	else
-		std::cout << "Error" << std::endl;
+		(void) a;
+	}
+	catch(const std::exception& e)
+	{
+		try
+		{
+			B& b = dynamic_cast<B&>(p);
+			std::cout << "The type is: B" << std::endl;
+			(void) b;
+		}
+		catch(const std::exception& e)
+		{
+			try
+			{
+				C& c = dynamic_cast<C&>(p);
+				std::cout << "The type is: C" << std::endl;
+				(void) c;
+			}
+			catch(const std::exception& e)
+			{
+				std::cout << "Error" << std::endl;
+			}
+		}
+	
+	}
+		
 }
 
 int main(void)
